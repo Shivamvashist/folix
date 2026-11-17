@@ -1,0 +1,21 @@
+packages:
+  - apps/*
+  - packages/*
+  - tooling/*
+
+# One version of each shared dependency across the workspace.
+# Reference these with "catalog:" in a package.json.
+catalog:
+  typescript: ^5.9.0
+  zod: ^4.6.7
+  vitest: ^5.1.0
+  eslint: ^9.39.0
+  drizzle-orm: ^0.45.4
+  '@types/node': ^22.0.0
+
+onlyBuiltDependencies:
+  - esbuild
+
+ignoredBuiltDependencies:
+  - sharp
+  - unrs-resolver
