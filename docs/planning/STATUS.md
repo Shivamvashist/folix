@@ -35,7 +35,7 @@ Verified: `pnpm check` passes (format, em-dash scan, lint, typecheck, 27 tests).
 - [ ] Signed-out visit to `/app` redirects to `/login`; signed-in visit to `/login` redirects to `/app`.
 - [ ] `/api/health` returns 200 with a database connected.
 - [ ] CI run on GitHub (the workflow has not run yet: nothing has been pushed).
-- [ ] Git hooks on a real commit (pre-commit formatting, commit message check).
+- [x] Git hooks on a real commit (pre-commit formatting, commit message check). Verified 17 Nov 2026.
 
 ## Before Milestone 2
 
