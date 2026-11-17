@@ -1,0 +1,31 @@
+{
+  "name": "@folix/db",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts",
+    "./schema": "./src/schema/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio"
+  },
+  "dependencies": {
+    "drizzle-orm": "catalog:",
+    "pg": "^8.16.0"
+  },
+  "devDependencies": {
+    "@folix/eslint-config": "workspace:*",
+    "@folix/tsconfig": "workspace:*",
+    "@types/node": "catalog:",
+    "@types/pg": "^8.15.0",
+    "drizzle-kit": "^0.31.11",
+    "eslint": "catalog:",
+    "typescript": "catalog:"
+  }
+}
