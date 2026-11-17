@@ -1,0 +1,4 @@
+{
+  "extends": "@folix/tsconfig/base.json",
+  "include": ["src", "*.config.mjs"]
+}
