@@ -1,0 +1,218 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+/*
+ * Folix design tokens. Full reference: docs/design/DESIGN-SYSTEM.md
+ *
+ * Components use colour ROLES (bg-background, text-muted-foreground, bg-brand), never raw
+ * values. To restyle the product, change the values in this file and nothing else.
+ */
+
+/* Dark mode follows the system setting. No class toggle, so no flash and no script. */
+@custom-variant dark (@media (prefers-color-scheme: dark));
+
+@theme inline {
+  /* Fonts (loaded in src/app/layout.tsx) */
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-bricolage), var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-bricolage), var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  /* Fluid type for marketing headings. Body text uses the default Tailwind scale. */
+  --text-display: clamp(2.75rem, 5.6vw + 1rem, 5.5rem);
+  --text-display--line-height: 0.98;
+  --text-display--letter-spacing: -0.04em;
+  --text-title: clamp(2rem, 2.6vw + 1.1rem, 3.25rem);
+  --text-title--line-height: 1.04;
+  --text-title--letter-spacing: -0.03em;
+  --text-lead: clamp(1.0625rem, 0.4vw + 0.95rem, 1.25rem);
+  --text-lead--line-height: 1.55;
+
+  /* Colour roles */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-brand-soft: var(--brand-soft);
+  --color-success: var(--success);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-inverse: var(--inverse);
+  --color-inverse-foreground: var(--inverse-foreground);
+  --color-inverse-muted: var(--inverse-muted);
+
+  /* Radius scale, derived from one value */
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* Elevation */
+  --shadow-soft: 0 1px 2px oklch(0.2 0.012 265 / 4%), 0 8px 24px -8px oklch(0.2 0.012 265 / 10%);
+  --shadow-lift: 0 2px 4px oklch(0.2 0.012 265 / 5%), 0 30px 60px -20px oklch(0.2 0.012 265 / 22%);
+
+  /* Motion */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-rise: rise 0.8s var(--ease-out-expo) both;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Light: warm paper, ink text, one ultramarine brand colour. */
+:root {
+  --radius: 0.75rem;
+
+  --background: oklch(0.985 0.006 85);
+  --foreground: oklch(0.2 0.012 265);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.2 0.012 265);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.2 0.012 265);
+  --primary: oklch(0.2 0.012 265);
+  --primary-foreground: oklch(0.985 0.006 85);
+  --secondary: oklch(0.95 0.008 85);
+  --secondary-foreground: oklch(0.2 0.012 265);
+  --muted: oklch(0.955 0.008 85);
+  --muted-foreground: oklch(0.46 0.014 265);
+  --accent: oklch(0.94 0.01 85);
+  --accent-foreground: oklch(0.2 0.012 265);
+  --brand: oklch(0.5 0.22 264);
+  --brand-foreground: oklch(0.99 0 0);
+  --brand-soft: oklch(0.94 0.035 264);
+  --success: oklch(0.52 0.13 155);
+  --destructive: oklch(0.55 0.22 27);
+  --border: oklch(0.9 0.008 85);
+  --input: oklch(0.86 0.008 85);
+  --ring: oklch(0.5 0.22 264);
+
+  /* The inverted band (principles section, footer): dark in both schemes. */
+  --inverse: oklch(0.2 0.012 265);
+  --inverse-foreground: oklch(0.97 0.006 85);
+  --inverse-muted: oklch(0.74 0.012 265);
+}
+
+/* Dark: deep ink, paper text, a lighter ultramarine that keeps contrast. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: oklch(0.165 0.012 265);
+    --foreground: oklch(0.96 0.006 85);
+    --card: oklch(0.205 0.014 265);
+    --card-foreground: oklch(0.96 0.006 85);
+    --popover: oklch(0.205 0.014 265);
+    --popover-foreground: oklch(0.96 0.006 85);
+    --primary: oklch(0.96 0.006 85);
+    --primary-foreground: oklch(0.2 0.012 265);
+    --secondary: oklch(0.25 0.014 265);
+    --secondary-foreground: oklch(0.96 0.006 85);
+    --muted: oklch(0.235 0.014 265);
+    --muted-foreground: oklch(0.74 0.012 265);
+    --accent: oklch(0.27 0.016 265);
+    --accent-foreground: oklch(0.96 0.006 85);
+    --brand: oklch(0.7 0.16 264);
+    --brand-foreground: oklch(0.16 0.02 264);
+    --brand-soft: oklch(0.3 0.08 264);
+    --success: oklch(0.74 0.15 155);
+    --destructive: oklch(0.7 0.19 22);
+    --border: oklch(1 0 0 / 11%);
+    --input: oklch(1 0 0 / 18%);
+    --ring: oklch(0.7 0.16 264);
+
+    --inverse: oklch(0.125 0.012 265);
+    --inverse-foreground: oklch(0.96 0.006 85);
+    --inverse-muted: oklch(0.72 0.012 265);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    @apply font-sans;
+    color-scheme: light dark;
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    text-rendering: optimizeLegibility;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: var(--brand);
+    color: var(--brand-foreground);
+  }
+
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Small uppercase mono label used above headings and inside the product preview. */
+  .eyebrow {
+    @apply font-mono text-xs tracking-[0.14em] text-muted-foreground uppercase;
+  }
+
+  /* Faint dot grid behind the hero. Decorative only. */
+  .dot-grid {
+    background-image: radial-gradient(circle at 1px 1px, var(--border) 1px, transparent 0);
+    background-size: 22px 22px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, black 30%, transparent 75%);
+  }
+}
